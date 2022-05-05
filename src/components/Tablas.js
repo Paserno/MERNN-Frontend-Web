@@ -3,7 +3,7 @@
 export const Tablas = () => {
     return (
         <div>
-            <table class="table table-dark table-hover">
+            <table className="table table-dark table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -27,7 +27,8 @@ export const Tablas = () => {
                     </tr>
                     <tr>
                         <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
+                        <td >Larry the Bird</td>
+                        <td>hola</td>
                         <td>@twitter</td>
                     </tr>
                 </tbody>
