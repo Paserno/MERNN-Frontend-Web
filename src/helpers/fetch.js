@@ -1,6 +1,7 @@
 const baseUrl = process.env.REACT_APP_API_URL;
 
 
+
 const fetchSinToken = async( endpoit, data, method = 'GET' ) => {
 
     const url = `${ baseUrl }/${ endpoit }`;

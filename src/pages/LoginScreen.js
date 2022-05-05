@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import { useForm } from '../hooks/useForm'
 
 export const LoginScreen = () => {
+
+    const {login} = useContext(AuthContext)
 
     const navigate = useNavigate();
 
@@ -12,9 +15,14 @@ export const LoginScreen = () => {
     });
     const { correo, password } = valuesInput;
 
-    const handleLogin = (e) => {
+    const handleLogin = async(e) => {
         e.preventDefault()
         console.log({correo, password})
+        const [ ok, msg ] = await login(correo, password);
+
+        if( !ok ){
+            console.log(msg);
+        }
     }
 
     const handleRegister = (e) => {
