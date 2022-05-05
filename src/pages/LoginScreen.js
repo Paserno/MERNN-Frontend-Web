@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { AuthContext } from '../context/AuthContext';
@@ -8,8 +8,6 @@ import { useForm } from '../hooks/useForm'
 export const LoginScreen = () => {
 
     const {login} = useContext(AuthContext)
-
-    const navigate = useNavigate();
 
     const [ valuesInput, handleInputChange ] = useForm({
         correo: '',
