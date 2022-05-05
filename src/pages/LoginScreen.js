@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm'
 
 export const LoginScreen = () => {
+
+    const navigate = useNavigate();
 
     const [ valuesInput, handleInputChange ] = useForm({
         correo: '',
@@ -14,6 +17,13 @@ export const LoginScreen = () => {
         console.log('hola')
     }
 
+    const handleRegister = (e) => {
+        navigate('/auth/register', {
+            replace: true
+        });
+        
+    }
+        
   return (
     
     <form className="login100-form validate-form flex-sb flex-w"
@@ -58,9 +68,12 @@ export const LoginScreen = () => {
             </div>
 
             <div className="col text-right">
-                <a href="register.html" className="txt1">
+                <button 
+                    className="txt1"
+                    onClick={ handleRegister } 
+                >
                     Nueva cuenta?
-                </a>
+                </button>
             </div>
         </div>
 
