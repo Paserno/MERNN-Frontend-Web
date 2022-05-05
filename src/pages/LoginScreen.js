@@ -10,11 +10,11 @@ export const LoginScreen = () => {
         correo: '',
         password: '',
     });
-    const { email: correo, password } = valuesInput;
+    const { correo, password } = valuesInput;
 
     const handleLogin = (e) => {
         e.preventDefault()
-        console.log('hola')
+        console.log({correo, password})
     }
 
     const handleRegister = (e) => {
