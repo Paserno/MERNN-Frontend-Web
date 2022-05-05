@@ -9,7 +9,8 @@ export const usuarioReducer = ( state, action) => {
         case types.usuariosCargados:
             return {
                 ...state,
-                usuarios: [...action.payload],
+                usuarios: action.payload[0],
+                total: action.payload[1],
                 isLoading: false
             };
     

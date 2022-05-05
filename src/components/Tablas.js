@@ -1,47 +1,83 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { ItemTabla } from './ItemTabla' 
 
+// FIXME: Codigo Spaghetti
 export const Tablas = () => {
     const { state } = useContext(UsuarioContext)
-    const { usuarios } = state;
-    const i = 0;
+    const { usuarios, total } = state;
+    const [pagina, setPagina] = useState({
+        num: 0,
+        valor: 1
+    });
+    const { num, valor } = pagina
+
+    let paginaMostrar = 5;
+    
+    let valorPagina = total / paginaMostrar;
+
+    const totalPaginas = Math.ceil(valorPagina);
+
+    const filtrarUsuarios = () => {
+        return usuarios.slice(num, num + paginaMostrar)
+    }
+    
+    const nextPage = () => {
+        if (valor !== totalPaginas ){
+            setPagina({num: num + paginaMostrar, valor: valor + 1});
+        }
+    }
+    const prePage = () => {
+        if ( num > 0 && valor > 1){
+            setPagina({ num: num - paginaMostrar, valor: valor - 1});
+        }
+    }
+
     return (
         <div>
-            <table className="table table-dark table-hover">
+            <table className="table table-dark table-hover" style={{ height: 450}}>
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col">Ciudad</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Rol</th>
+                        <th style={{ width: 25}} scope="col">ID</th>
+                        <th style={{ width: 80}} scope="col">Nombre</th>
+                        <th style={{ width: 80}} scope="col">Apellido</th>
+                        <th style={{ width: 150}} scope="col">Correo</th>
+                        <th style={{ width: 80}} scope="col">Ciudad</th>
+                        <th style={{ width: 80}} scope="col">Dirección</th>
+                        <th style={{ width: 80}} scope="col">Rol</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        usuarios.map( (usuario, index) => (
+                        filtrarUsuarios().map( (usuario, index) => (
                             <ItemTabla 
                                 key= { usuario.uid }
                                 ids= {index}
                                 { ...usuario } 
                             />
                         ) )
-                    }
-                {/* {
-                    heroes.map( hero => (
-                        <HeroCard 
-                            key={ hero.id }
-                            {...hero }
-                        />
-                    ))
-                } */}
-                {/* <ItemTabla /> */}
-                    
+                    }                    
                 </tbody>
             </table>
+            <div className='pagination justify-content-center'>
+                <button
+                    type='button'
+                    className='btn btn-danger ms-1'
+                    onClick={ prePage }
+                >
+                    Previous 
+                </button> 
+                &nbsp;
+                <button
+                    type='button'
+                    className='btn btn-primary'
+                    onClick={ nextPage }
+                >
+                    Next
+                </button>
+
+            </div>
+            
         </div>
     )
 }

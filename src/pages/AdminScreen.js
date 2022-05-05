@@ -14,10 +14,7 @@ export const AdminScreen = () => {
   }, [])
   
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log('hola')
-  } 
+  
 
   return (
     <div className='container' >
@@ -30,12 +27,7 @@ export const AdminScreen = () => {
     }
       
 
-      < button
-        className='btn btn-danger'
-        onClick={ handleClick }
-      >
-        Cargar
-      </button>
+     
     </div>
   )
 }
