@@ -20,10 +20,8 @@ export const UsuarioProvider = ({ children }) => {
     const cargarUsuarios = async() => {
         const resp = await fetchConToken('admin', {}, 'GET');
 
-        console.log(resp)
         if ( resp.ok ){
             const { usuarios, total } = resp;
-            console.log(total);
             dispatch({
                 type: types.usuariosCargados,
                 payload: usuarios

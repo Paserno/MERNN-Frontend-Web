@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 export const ItemTabla = ({
+    uid,
     nombre,
     apellido,
     correo,
@@ -13,9 +14,14 @@ export const ItemTabla = ({
 
     const contador = ids + 1;
     
+    const onClick = async() => {
+      console.log('hola: ', uid)
+    }
 
   return (
-    <tr>
+    <tr
+      onClick={onClick }
+    >
         <th scope="row">{contador}</th>
         <td>{ nombre }</td>
         <td>{ apellido }</td>

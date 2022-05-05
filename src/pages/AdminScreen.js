@@ -16,8 +16,7 @@ export const AdminScreen = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(usuarios);
-    
+    console.log('hola')
   } 
 
   return (

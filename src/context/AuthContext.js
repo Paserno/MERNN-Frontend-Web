@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
         if ( resp.ok ){
             localStorage.setItem('token', resp.token);
             const { usuario } = resp;
-            console.log(usuario);
             setAuth({
                 checking: false,
                 logged: true,
