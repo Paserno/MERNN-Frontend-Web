@@ -1,5 +1,5 @@
-import { createContext, useState } from 'react';
-import { fetchSinToken } from '../helpers/fetch';
+import { createContext, useCallback, useState } from 'react';
+import { fetchConToken, fetchSinToken } from '../helpers/fetch';
 
 
 
@@ -38,10 +38,59 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+    const logout = () => {
+
+        setAuth(initialState);
+        console.log(auth.logged);
+    }
+
+    const verificarToken = useCallback( async() => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            setAuth({
+                checking: false,
+                logged: false,
+                uid: null,
+                name: null,
+                correo: null,
+            })
+            return false;
+        }
+
+        const resp = await fetchConToken('admin/renew');
+        if (resp.ok) {
+            localStorage.setItem('token', resp.token);
+            const { usuario } = resp;
+            setAuth({
+                checking: false,
+                logged: true,
+                uid: usuario.uid,
+                name: usuario.nombre,
+                correo: usuario.correo
+            });
+            return true;
+        }else {
+            setAuth({
+                checking: false,
+                logged: false,
+                uid: null,
+                name: null,
+                correo: null,
+            });
+            return false
+        }
+
+
+    })
+
+
     return (
         <AuthContext.Provider value={{
             auth,
-            login
+            login,
+            logout,
+            verificarToken
         }}>
             { children }
         </AuthContext.Provider>

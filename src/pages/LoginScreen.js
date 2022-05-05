@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 import { AuthContext } from '../context/AuthContext';
 import { useForm } from '../hooks/useForm'
 
@@ -17,28 +19,21 @@ export const LoginScreen = () => {
 
     const handleLogin = async(e) => {
         e.preventDefault()
-        console.log({correo, password})
+        
         const [ ok, msg ] = await login(correo, password);
 
         if( !ok ){
-            console.log(msg);
+            Swal.fire('Error', msg, 'error');
         }
     }
 
-    const handleRegister = (e) => {
-        e.preventDefault()
-        navigate('/auth/register', {
-            replace: true
-        });
-        
-    }
         
   return (
     
     <form className="login100-form validate-form flex-sb flex-w"
     >
         <span className="login100-form-title mb-3">
-            Chat - Ingreso
+            Login
         </span>
         
         <div className="wrap-input100 validate-input mb-3">
@@ -77,12 +72,12 @@ export const LoginScreen = () => {
             </div>
 
             <div className="col text-right">
-                <button 
+                <Link 
                     className="txt1"
-                    onClick={ handleRegister } 
+                    to='/auth/register' 
                 >
                     Nueva cuenta?
-                </button>
+                </Link>
             </div>
         </div>
 

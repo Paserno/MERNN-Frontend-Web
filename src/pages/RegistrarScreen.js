@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from '../hooks/useForm'
 
 export const RegistrarScreen = () => {
@@ -13,20 +13,12 @@ export const RegistrarScreen = () => {
     const navigate = useNavigate(); 
 
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-        navigate('/auth/login', {
-            replace: true
-        });
-        
-    }
-
   return (
    
     <form className="login100-form validate-form flex-sb flex-w"
     >
         <span className="login100-form-title mb-3">
-            Chat - Registro
+             Registro
         </span>
 
         <div className="wrap-input100 validate-input mb-3">
@@ -66,12 +58,12 @@ export const RegistrarScreen = () => {
         
         <div className="row mb-3">
             <div className="col text-right">
-                <button 
+                <Link 
                     className="txt1"
-                    onClick={ handleLogin } 
+                    to='/auth/login'
                 >
                     Ya tienes cuenta?
-                </button>
+                </Link>
             </div>
         </div>
 
