@@ -7,7 +7,6 @@ export const Navbar = () => {
 
     const handleLogout = () => {
        
-
         navigate('/auth', {
             replace: true
         });
@@ -21,7 +20,7 @@ export const Navbar = () => {
                 className="navbar-brand" 
                 to="/"
             >
-                Asociaciones
+                Administación
             </Link>
 
             <div className="navbar-collapse">
