@@ -1,36 +1,45 @@
-
+import { useContext } from 'react';
+import { UsuarioContext } from '../context/UsuarioContext';
+import { ItemTabla } from './ItemTabla' 
 
 export const Tablas = () => {
+    const { state } = useContext(UsuarioContext)
+    const { usuarios } = state;
+    const i = 0;
     return (
         <div>
             <table className="table table-dark table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Rol</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td >Larry the Bird</td>
-                        <td>hola</td>
-                        <td>@twitter</td>
-                    </tr>
+                    {
+                        usuarios.map( (usuario, index) => (
+                            <ItemTabla 
+                                key= { usuario.uid }
+                                ids= {index}
+                                { ...usuario } 
+                            />
+                        ) )
+                    }
+                {/* {
+                    heroes.map( hero => (
+                        <HeroCard 
+                            key={ hero.id }
+                            {...hero }
+                        />
+                    ))
+                } */}
+                {/* <ItemTabla /> */}
+                    
                 </tbody>
             </table>
         </div>

@@ -1,13 +1,15 @@
 import React from 'react';
 import { AuthProvider } from './context/AuthContext';
+import { UsuarioProvider } from './context/UsuarioContext';
 import { AppRouter } from './routers/AppRouter';
 
 
 export const JardinApp = () => {
   return (
       <AuthProvider>
-        <AppRouter />
-
+        <UsuarioProvider>
+          <AppRouter />
+        </UsuarioProvider>
       </AuthProvider>
 
   )
