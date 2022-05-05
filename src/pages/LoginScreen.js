@@ -18,6 +18,7 @@ export const LoginScreen = () => {
     }
 
     const handleRegister = (e) => {
+        e.preventDefault()
         navigate('/auth/register', {
             replace: true
         });

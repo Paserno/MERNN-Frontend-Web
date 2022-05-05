@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm'
 
 export const RegistrarScreen = () => {
@@ -8,6 +9,17 @@ export const RegistrarScreen = () => {
         password: '',
     });
     const {nombre, correo, password} = valuesInput;
+
+    const navigate = useNavigate(); 
+
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        navigate('/auth/login', {
+            replace: true
+        });
+        
+    }
 
   return (
    
@@ -54,9 +66,12 @@ export const RegistrarScreen = () => {
         
         <div className="row mb-3">
             <div className="col text-right">
-                <a href="login.html" className="txt1">
+                <button 
+                    className="txt1"
+                    onClick={ handleLogin } 
+                >
                     Ya tienes cuenta?
-                </a>
+                </button>
             </div>
         </div>
 
