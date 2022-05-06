@@ -26,7 +26,7 @@ export const ItemTabla = ({
     confirmButtonText: 'Si, Cambiar!'
   }
 
-  const { cambiarRol } = useContext(UsuarioContext)
+  const { cambiarRol, uiOpenModal } = useContext(UsuarioContext)
 
     // const contador = ids + 1;
     
@@ -58,8 +58,12 @@ export const ItemTabla = ({
           )
         }
       })
-      
+    }
 
+    const editarUsuario = (e) => {
+      e.preventDefault();
+      console.log('abrir modal')
+      uiOpenModal();
     }
 
   return (
@@ -101,7 +105,7 @@ export const ItemTabla = ({
         <td>
             <button 
               className='btn btn-info'
-              onClick={() => console.log('adios') }
+              onClick={editarUsuario }
             >
               Editar
             </button>

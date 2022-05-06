@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Modal from 'react-modal/lib/components/Modal';
+import { UsuarioContext } from '../context/UsuarioContext';
 
 
 import '../css/modal.css'
 
 export const ModalComponent = () => {
+
+    const {state, uiCloseModal} = useContext(UsuarioContext)
 
     const customStyles = {
         content: {
@@ -20,7 +23,7 @@ export const ModalComponent = () => {
 
 
     const closeModal = () => {
-
+        uiCloseModal()
     } 
 
     const handleSubmitForm = (e) => {
@@ -32,7 +35,7 @@ export const ModalComponent = () => {
   return (
     
     <Modal
-        isOpen={ false }
+        isOpen={ state.modalOpen }
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
@@ -51,29 +54,33 @@ export const ModalComponent = () => {
                 <input className='form-control' placeholder='Nombre'/>
             </div>
             <div className='form-group'>
-                <label>Nombre</label>
-                <input className='form-control' placeholder='Nombre'/>
+                <label>Apellido</label>
+                <input className='form-control' placeholder='Apellido'/>
             </div>
             <div className='form-group'>
-                <label>Nombre</label>
-                <input className='form-control' placeholder='Nombre'/>
+                <label>Correo</label>
+                <input className='form-control' placeholder='Correo'/>
             </div>
             <div className='form-group'>
-                <label>Nombre</label>
-                <input className='form-control' placeholder='Nombre'/>
+                <label>Ciudad</label>
+                <input className='form-control' placeholder='Ciudad'/>
             </div>
-            <select className="form-control mb-3" aria-label="Default select example">
-                <option value="default" >Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+            <div className='form-group'>
+                <label>Direacción</label>
+                <input className='form-control' placeholder='Direccion'/>
+            </div>
+            <div className='form-group'>
+                <label>Rol</label>
+                <input className='form-control' placeholder='Rol'/>
+            </div>
+            
             <button 
                 type='submit'
-                className='btn btn-block btn-outline-primary'
+                className='btn btn-block btn-outline-primary mt-5'
             >
                 Guardar
             </button>
+            
 
 
         </form>

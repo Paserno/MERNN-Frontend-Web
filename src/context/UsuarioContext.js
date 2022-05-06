@@ -11,7 +11,8 @@ const initialState = {
     isLoading: true,
     usuarios: [],   // Todos los usuartios de la base de dato
     jardineros: [],
-    total: 0
+    total: 0,
+    modalOpen: false,
 }
 
 export const UsuarioProvider = ({ children }) => {
@@ -43,13 +44,24 @@ export const UsuarioProvider = ({ children }) => {
 
     }
 
+    const uiOpenModal = () => {
+        dispatch({type: types.uiOpenModal})
+    };
+    
+    const uiCloseModal = () => {
+        dispatch({
+            type: types.uiCloseModal
+        })
+    };
 
 
     return (
         <UsuarioContext.Provider value={{
             state,
             cargarUsuarios,
-            cambiarRol
+            cambiarRol,
+            uiOpenModal,
+            uiCloseModal,
 
         }}
         >
