@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import Swal from "sweetalert2";
 import { fetchConToken } from "../helpers/fetch";
 import { usuarioReducer } from "../reducers/usuarioReducer";
 import { types } from "../types/types";
@@ -11,6 +12,7 @@ const initialState = {
     isLoading: true,
     usuarios: [],   // Todos los usuartios de la base de dato
     jardineros: [],
+    usuario: {},   // Un Registro de la BD
     total: 0,
     modalOpen: false,
 }
@@ -41,7 +43,28 @@ export const UsuarioProvider = ({ children }) => {
                 payload: usuario
             })
         }
+    }
 
+    const obtenerUsuario = async( id ) => {
+        Swal.fire({
+            title: 'Cargando...',
+            text: 'Espere por favor...',
+            allowOutsideClick: false,
+            backdrop: 'rgba(0,0,0,1)',
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        const resp = await fetchConToken(`admin/${ id }`);
+
+        if (resp.ok){
+            const { usuario } = resp;
+            dispatch({
+                type: types.obtenerUsuario,
+                payload: usuario
+            })
+        }
+        Swal.close();
     }
 
     const uiOpenModal = () => {
@@ -62,6 +85,7 @@ export const UsuarioProvider = ({ children }) => {
             cambiarRol,
             uiOpenModal,
             uiCloseModal,
+            obtenerUsuario,
 
         }}
         >

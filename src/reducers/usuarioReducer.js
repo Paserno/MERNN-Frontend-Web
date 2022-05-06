@@ -25,6 +25,12 @@ export const usuarioReducer = ( state, action) => {
                 )
             }
 
+            case types.obtenerUsuario:
+                return {
+                    ...state,
+                    usuario: action.payload
+                }
+
             case types.uiOpenModal:
                 return {
                     ...state,
