@@ -43,6 +43,19 @@ export const usuarioReducer = ( state, action) => {
                     modalOpen: false
                 }
     
+
+            case types.uiOpenModalRegister:
+                return {
+                    ...state,
+                    modalOpenR: true
+                }
+    
+            case types.uiCloseModalRegister:
+                return {
+                    ...state,
+                    modalOpenR: false
+                }
+
         default:
             return state;
     }

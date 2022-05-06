@@ -7,4 +7,7 @@ export const types = {
 
     uiOpenModal: '[UI] Abrir Modal',
     uiCloseModal: '[UI Cerrar Modal',
+
+    uiOpenModalRegister: '[UI] Abrir Modal de Registro',
+    uiCloseModalRegister: '[UI Cerrar Modal de Registro',
 }

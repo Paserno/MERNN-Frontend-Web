@@ -16,7 +16,7 @@ const initialState ={
 
 export const ModalComponent = () => {
 
-    const {state, uiCloseModal} = useContext(UsuarioContext);
+    const {state, uiCloseModal, uiOpenModalRegister} = useContext(UsuarioContext);
     const { usuario } = state;
     // const initialState = usuario;
     const [dataUsuario, setDataUsuario] = useState({})
@@ -51,12 +51,16 @@ export const ModalComponent = () => {
 
     const closeModal = () => {
         uiCloseModal()
-        setDataUsuario(initialState);
+        setTimeout(() => {
+            setDataUsuario(initialState);
+        }, 200);
     } 
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
         console.log(usuario);
+        uiCloseModal();
+        uiOpenModalRegister();
        
     } 
     const handleInputChange = ({ target }) => {
@@ -76,7 +80,7 @@ export const ModalComponent = () => {
         onRequestClose={closeModal}
         style={customStyles}
         className="modal"
-        // closeTimeoutMS={ 200 }
+        closeTimeoutMS={ 200 }
         overlayClassName="modal-fondo"
       >
         <h1>Datos del Usuario</h1>
@@ -112,7 +116,7 @@ export const ModalComponent = () => {
             </div>
             
             {
-                (rol === 'USER_ROLE')
+                (rol !== 'OTRO_ROLE')
                         ? (<div className="alert alert-danger" role="alert">
                             Por favor cambiar Rol para el siguiente paso.
                             </div>)
@@ -125,7 +129,7 @@ export const ModalComponent = () => {
             <button 
                 type='submit'
                 className='btn btn-block btn-outline-info '
-                disabled={(rol === 'USER_ROLE') ? true : false}
+                disabled={(rol !== 'OTRO_ROLE') ? true : false}
             >
                 Siguiente
             </button>

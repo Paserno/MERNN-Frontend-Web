@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { ModalComponent } from '../components/ModalComponent';
+import { RegistrarJardinero } from '../components/RegistrarJardinero';
 import { Tablas } from '../components/Tablas'
 import { UsuarioContext } from '../context/UsuarioContext'
 
@@ -28,6 +29,7 @@ export const AdminScreen = () => {
     }
       
       <ModalComponent />
+      <RegistrarJardinero />
      
     </div>
   )

@@ -15,6 +15,7 @@ const initialState = {
     usuario: {},   // Un Registro de la BD
     total: 0,
     modalOpen: false,
+    modalOpenR: false,
 }
 
 export const UsuarioProvider = ({ children }) => {
@@ -77,6 +78,13 @@ export const UsuarioProvider = ({ children }) => {
         })
     };
 
+    const uiOpenModalRegister = () => {
+        dispatch({type: types.uiOpenModalRegister})
+    }
+    const uiCloseModalRegister = () => {
+        dispatch({type: types.uiCloseModalRegister})
+    }
+
 
     return (
         <UsuarioContext.Provider value={{
@@ -86,6 +94,8 @@ export const UsuarioProvider = ({ children }) => {
             uiOpenModal,
             uiCloseModal,
             obtenerUsuario,
+            uiOpenModalRegister,
+            uiCloseModalRegister
 
         }}
         >

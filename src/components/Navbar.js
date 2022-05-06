@@ -36,12 +36,12 @@ export const Navbar = () => {
                         Marvel
                     </NavLink> */}
 
-                    <NavLink
+                    {/* <NavLink
                         className={ ({isActive}) => 'nav-item nav-link' + ( isActive ? ' active ' : '') }
                         to="/jardin"
                     >
                         Jardinero
-                    </NavLink> 
+                    </NavLink>  */}
                 </div>
             </div>
 

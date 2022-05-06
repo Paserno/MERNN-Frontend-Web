@@ -9,7 +9,7 @@ export const AdminRouter = () => {
       <Navbar />
 
         <Routes>
-            <Route path="/jardin" element={<RegistrarJardinero />} />
+            {/* <Route path="/jardin" element={<RegistrarJardinero />} /> */}
             <Route path="/" element={<AdminScreen />} />
 
             
