@@ -65,6 +65,8 @@ export const ModalComponent = () => {
           [target.name]: target.value
         });
       }
+
+      
     
   return (
     
@@ -109,11 +111,31 @@ export const ModalComponent = () => {
                 <input className='form-control' placeholder='Rol' value={rol} onChange={ handleInputChange} disabled/>
             </div>
             
+            {
+                (rol === 'USER_ROLE')
+                        ? (<div className="alert alert-danger" role="alert">
+                            Por favor cambiar Rol para el siguiente paso.
+                            </div>)
+                        : (<div className="alert alert-info" role="alert">
+                        En el siguiente punto puede Registrar al Jardinero.
+                        </div>)
+            }
+
+
             <button 
                 type='submit'
-                className='btn btn-block btn-outline-primary mt-5'
+                className='btn btn-block btn-outline-info '
+                disabled={(rol === 'USER_ROLE') ? true : false}
             >
-                Guardar
+                Siguiente
+            </button>
+
+            <button 
+                onClick={closeModal}
+                type='button'
+                className='btn btn-block btn-outline-danger mt-2'
+            >
+                Cancelar
             </button>
             
 

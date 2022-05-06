@@ -70,7 +70,7 @@ export const Tablas = () => {
             <div className='pagination justify-content-center'>
                 <button
                     type='button'
-                    className='btn btn-danger ms-1'
+                    className='btn btn-dark ms-1'
                     onClick={ prePage }
                 >
                     Previous 
@@ -78,7 +78,7 @@ export const Tablas = () => {
                 &nbsp;
                 <button
                     type='button'
-                    className='btn btn-primary'
+                    className='btn btn-dark'
                     onClick={ nextPage }
                 >
                     Next
