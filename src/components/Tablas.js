@@ -19,7 +19,8 @@ export const Tablas = () => {
     const totalPaginas = Math.ceil(valorPagina);
 
     const filtrarUsuarios = () => {
-        return usuarios.slice(num, num + paginaMostrar)
+        const usuario = usuarios.filter(filtroAdmin);
+        return usuario.slice(num, num + paginaMostrar)
     }
     
     const nextPage = () => {
@@ -33,18 +34,25 @@ export const Tablas = () => {
         }
     }
 
+    const filtroAdmin = (usuario) => {
+        if ( usuario.rol !== 'ADMIN_ROLE') return true;
+
+    }
+
     return (
         <div>
             <table className="table table-dark table-hover" style={{ height: 450}}>
                 <thead>
                     <tr>
-                        <th style={{ width: 25}} scope="col">ID</th>
+                        {/* <th style={{ width: 25}} scope="col">ID</th> */}
                         <th style={{ width: 80}} scope="col">Nombre</th>
                         <th style={{ width: 80}} scope="col">Apellido</th>
                         <th style={{ width: 150}} scope="col">Correo</th>
                         <th style={{ width: 80}} scope="col">Ciudad</th>
                         <th style={{ width: 80}} scope="col">Dirección</th>
                         <th style={{ width: 80}} scope="col">Rol</th>
+                        <th style={{ width: 100}} scope="col">Cambiar Rol</th>
+                        <th style={{ width: 80}} scope="col">Registrar</th>
                     </tr>
                 </thead>
                 <tbody>

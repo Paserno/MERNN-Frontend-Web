@@ -30,11 +30,26 @@ export const UsuarioProvider = ({ children }) => {
         }
     }
 
+    const cambiarRol = async(id, rol) => {
+        const resp = await fetchConToken(`admin/${id}`, {rol}, 'PUT');
+
+        if (resp.ok){
+            const { usuario } = resp
+            dispatch({
+                type: types.cambiarRol,
+                payload: usuario
+            })
+        }
+
+    }
+
+
 
     return (
         <UsuarioContext.Provider value={{
             state,
-            cargarUsuarios
+            cargarUsuarios,
+            cambiarRol
 
         }}
         >

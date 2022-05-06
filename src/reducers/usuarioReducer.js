@@ -13,6 +13,17 @@ export const usuarioReducer = ( state, action) => {
                 total: action.payload[1],
                 isLoading: false
             };
+
+        case types.cambiarRol: 
+            return {
+                ...state,
+                usuarios: state.usuarios.map(
+                    e => ( e.uid === action.payload.uid)
+                            ? action.payload
+                            : e
+
+                )
+            }
     
         default:
             return state;

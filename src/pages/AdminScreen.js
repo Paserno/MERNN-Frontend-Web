@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import { ModalComponent } from '../components/ModalComponent';
 import { Tablas } from '../components/Tablas'
 import { UsuarioContext } from '../context/UsuarioContext'
 
@@ -22,11 +23,11 @@ export const AdminScreen = () => {
 
     {
       (isLoading) 
-          ? (<h2>Esperar...</h2>)
+          ? (<h2 className='container'>Cargando...</h2>)
           : <Tablas />
     }
       
-
+      <ModalComponent />
      
     </div>
   )
