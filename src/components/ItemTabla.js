@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import Swal from 'sweetalert2'
 import { UsuarioContext } from '../context/UsuarioContext'
 
 
@@ -14,18 +15,50 @@ export const ItemTabla = ({
     
 }) => {
 
+  const warningAlert = {
+    title: 'Cambiar Rol',
+    iconColor:'#F99020',
+    text: "¿Seguro que quieres Cambiar el Rol?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#207CF9',
+    cancelButtonColor: '#5C5B5B',
+    confirmButtonText: 'Si, Cambiar!'
+  }
+
   const { cambiarRol } = useContext(UsuarioContext)
 
     // const contador = ids + 1;
     
     const changeGardin = async() => {
-      console.log('jardin: ', uid)
-      cambiarRol(uid, 'OTRO_ROLE');
+       Swal.fire(warningAlert).then((result) => {
+        if (result.isConfirmed) {
 
+          cambiarRol(uid, 'OTRO_ROLE');
+
+          Swal.fire(
+              'Guardado!',
+              'El Rol ha sido Cambiado.',
+              'success'
+          )
+        }
+      })
     }
+
     const changeUsuario = async() => {
-      console.log('Usuario: ', uid)
-      cambiarRol(uid, 'USER_ROLE');
+      Swal.fire(warningAlert).then((result) => {
+        if (result.isConfirmed) {
+
+          cambiarRol(uid, 'USER_ROLE');
+
+          Swal.fire(
+              'Guardado!',
+              'El Rol ha sido Cambiado.',
+              'success'
+          )
+        }
+      })
+      
 
     }
 
