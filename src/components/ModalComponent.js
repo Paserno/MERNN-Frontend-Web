@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal/lib/components/Modal';
 import { UsuarioContext } from '../context/UsuarioContext';
 
-
 import '../css/modal.css'
 
 const initialState ={ 
@@ -16,7 +15,7 @@ const initialState ={
 
 export const ModalComponent = () => {
 
-    const {state, uiCloseModal, uiOpenModalRegister} = useContext(UsuarioContext);
+    const {state, uiCloseModal, uiOpenModalRegister, obtenerJardinero, obtenerNombreJardinero} = useContext(UsuarioContext);
     const { usuario } = state;
     // const initialState = usuario;
     const [dataUsuario, setDataUsuario] = useState({})
@@ -58,10 +57,11 @@ export const ModalComponent = () => {
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        console.log(usuario);
         uiCloseModal();
+        obtenerNombreJardinero(usuario.nombre);
+        obtenerJardinero(usuario.uid);
         uiOpenModalRegister();
-       
+
     } 
     const handleInputChange = ({ target }) => {
         setDataUsuario({

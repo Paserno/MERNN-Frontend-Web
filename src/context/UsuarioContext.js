@@ -12,10 +12,13 @@ const initialState = {
     isLoading: true,
     usuarios: [],   // Todos los usuartios de la base de dato
     jardineros: [],
+    jardinero: {},
     usuario: {},   // Un Registro de la BD
     total: 0,
     modalOpen: false,
     modalOpenR: false,
+    nombre: '',
+    ok: false
 }
 
 export const UsuarioProvider = ({ children }) => {
@@ -85,6 +88,78 @@ export const UsuarioProvider = ({ children }) => {
         dispatch({type: types.uiCloseModalRegister})
     }
 
+    const obtenerJardinero = async( id ) => {
+        Swal.fire({
+            title: 'Cargando...',
+            text: 'Espere por favor...',
+            allowOutsideClick: false,
+            backdrop: 'rgba(0,0,0,1)',
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        const resp = await fetchConToken(`admin/jardin/${ id }`);
+
+        if (resp.ok){
+            const { jardinero } = resp;
+            dispatch({
+                type: types.obtenerJardinero,
+                payload: jardinero
+            })
+            okActualizarDatos(resp.ok);
+            console.log(resp.ok)
+        } else {
+            const jardinero = {};
+            dispatch({
+                type: types.obtenerJardinero,
+                payload: jardinero
+            })
+            okActualizarDatos(resp.ok);
+            console.log(resp.ok)
+        }
+        Swal.close();
+    }
+
+    const obtenerNombreJardinero = (nombre) => {
+        dispatch({
+            type: types.obtenerNombre,
+            payload: nombre
+        })
+    } 
+
+    const okActualizarDatos = (ok) => {
+        dispatch({
+            type: types.okActualizarDatos,
+            payload: ok
+        })
+    }
+
+    const crearJardinero = async(usuario, especialidad, descripcion,activo ) => {
+        
+        const resp = await fetchConToken('admin/jardinero', { usuario, especialidad, descripcion, activo}, 'POST');
+       
+        if ( resp.ok ) {
+            const {jardinero} = resp
+            dispatch({
+                type: types.crearJardinero,
+                payload: jardinero
+            })
+        }
+
+    }
+    const actualizarJardinero = async(id ,activo, descripcion, especialidad) => {
+
+        const resp = await fetchConToken(`admin/jardinero/${id}`, { especialidad, descripcion, activo}, 'PUT');
+        console.log(resp)
+        if (resp.ok ){
+            const {jardinero} = resp
+            dispatch({
+                type: types.crearJardinero,
+                payload: jardinero
+            })
+        }
+    }
+
 
     return (
         <UsuarioContext.Provider value={{
@@ -95,7 +170,11 @@ export const UsuarioProvider = ({ children }) => {
             uiCloseModal,
             obtenerUsuario,
             uiOpenModalRegister,
-            uiCloseModalRegister
+            uiCloseModalRegister,
+            obtenerJardinero,
+            obtenerNombreJardinero,
+            crearJardinero,
+            actualizarJardinero,
 
         }}
         >

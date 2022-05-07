@@ -31,6 +31,12 @@ export const usuarioReducer = ( state, action) => {
                     usuario: action.payload
                 }
 
+            case types.obtenerJardinero:
+                return {
+                    ...state,
+                    jardinero: action.payload
+                }
+
             case types.uiOpenModal:
                 return {
                     ...state,
@@ -54,6 +60,30 @@ export const usuarioReducer = ( state, action) => {
                 return {
                     ...state,
                     modalOpenR: false
+                }
+
+            case types.obtenerNombre:
+                return {
+                    ...state,
+                    nombre: action.payload
+                }
+            
+            case types.okActualizarDatos:
+                return {
+                    ...state,
+                    ok: action.payload
+                }
+
+            case types.crearJardinero:
+                return {
+                    ...state,
+                    jardinero: action.payload
+                }
+
+            case types.actualizarJardinero:
+                return {
+                    ...state,
+                    jardinero: action.payload
                 }
 
         default:

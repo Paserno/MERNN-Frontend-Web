@@ -20,7 +20,7 @@ export const AdminScreen = () => {
 
   return (
     <div className='container' >
-      <h1 style={{marginBottom: '15px'}}>AdminScreen</h1>
+      <h1 style={{marginBottom: '15px'}}>Admin</h1>
 
     {
       (isLoading) 
