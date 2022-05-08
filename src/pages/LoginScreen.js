@@ -25,6 +25,9 @@ export const LoginScreen = () => {
         }
     }
 
+    const todoOk=()=>{
+        return (correo.length > 1 && password.length > 1) ? true : false;
+    }
         
   return (
     
@@ -83,6 +86,7 @@ export const LoginScreen = () => {
             <button 
                 className="login100-form-btn"
                 onClick={ handleLogin }
+                disabled={!todoOk()}
             >
                 Ingresar
             </button>

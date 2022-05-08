@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Modal from 'react-modal/lib/components/Modal'
+import Swal from 'sweetalert2';
 import { UsuarioContext } from '../context/UsuarioContext';
 
 import '../css/modal.css'
@@ -8,6 +9,18 @@ const initialState = {
   descripcion: '', 
   especialidad: '',
   activo: false
+}
+
+
+const warningAlert = {
+  title: 'Guardar Registro',
+  iconColor:'#F99020',
+  text: "",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#207CF9',
+  cancelButtonColor: '#5C5B5B',
+  confirmButtonText: 'Si, Guardar!'
 }
 
 
@@ -73,23 +86,53 @@ export const RegistrarJardinero = () => {
     e.preventDefault();
     if (ok ){
       const id = jardinero._id;
-      console.log(id);
-      actualizarJardinero( id, activo, descripcion, especialidad);
-      closeModal();
+      const text = '¿Seguro que quiere Guardar los Cambios?';
+      warningAlert.text = text
+      Swal.fire(warningAlert).then((result) => {
+        if (result.isConfirmed) {
+
+          console.log(id);
+          actualizarJardinero( id, activo, descripcion, especialidad);
+          closeModal();
+          
+
+          Swal.fire(
+              'Guardado!',
+              'Los datos han sido Guardados.',
+              'success'
+          )
+        }
+      })
 
     }else {
-      
       const usuario = uid
-      crearJardinero(
-          usuario,  
-         especialidad,
-         descripcion,
-         activo,
-      );
-      closeModal();
+      const text = '¿Seguro que quiere Guardar el Registro?';
+      warningAlert.text = text
+      Swal.fire(warningAlert).then((result) => {
+        if (result.isConfirmed) {
+
+          crearJardinero(
+              usuario,  
+             especialidad,
+             descripcion,
+             activo,
+          );
+          closeModal();
+
+          Swal.fire(
+              'Guardado!',
+              'Los datos han sido Guardados.',
+              'success'
+          )
+        }
+      })
 
     }
   }
+
+  const todoOk=()=>{
+    return (especialidad.length > 1 ) ? true : false;
+}
 
   
 
@@ -159,6 +202,7 @@ export const RegistrarJardinero = () => {
         <button 
           type='submit'
           className='btn btn-block btn-outline-info mt-2'
+          disabled={!todoOk()}
         >
           Guardar
         </button>
