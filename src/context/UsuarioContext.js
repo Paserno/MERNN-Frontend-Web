@@ -107,7 +107,6 @@ export const UsuarioProvider = ({ children }) => {
                 payload: jardinero
             })
             okActualizarDatos(resp.ok);
-            console.log(resp.ok)
         } else {
             const jardinero = {};
             dispatch({
