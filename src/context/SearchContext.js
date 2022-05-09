@@ -28,7 +28,7 @@ export const SearchProvider = ({ children }) => {
             return []
         }
         name = name.toLowerCase();
-        filterUser = usuarios.filter( usuario => usuario.nombre.toLowerCase().includes(name));
+        filterUser = usuarios.filter( usuario => usuario.nombre.toLowerCase().includes(name) || usuario.correo.toLowerCase().includes(name));
 
         setSearchingUser({
             ...searchingUser,
