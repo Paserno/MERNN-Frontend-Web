@@ -23,25 +23,25 @@ export const Navbar = () => {
                 className="navbar-brand" 
                 to="/"
             >
-                Administación
+                Inicio
             </Link>
 
             <div className="navbar-collapse">
                 <div className="navbar-nav">
 
-                    {/* <NavLink
+                    <NavLink
                         className={ ({isActive}) => 'nav-item nav-link' + ( isActive ? ' active ' : '') }
-                        to="/marvel"
+                        to="/"
                     >
-                        Marvel
-                    </NavLink> */}
+                        Administrar
+                    </NavLink>
 
-                    {/* <NavLink
+                    <NavLink
                         className={ ({isActive}) => 'nav-item nav-link' + ( isActive ? ' active ' : '') }
-                        to="/jardin"
+                        to="/rol" style={{ width: '120px'}}
                     >
-                        Jardinero
-                    </NavLink>  */}
+                        Cambio de Rol
+                    </NavLink> 
                 </div>
             </div>
 

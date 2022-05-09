@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
-import { RegistrarJardinero } from '../components/RegistrarJardinero'
 import { AdminScreen } from '../pages/AdminScreen'
+import { CambioRolScreen } from '../pages/CambioRolScreen'
 
 export const AdminRouter = () => {
   return (
@@ -9,8 +9,8 @@ export const AdminRouter = () => {
       <Navbar />
 
         <Routes>
-            {/* <Route path="/jardin" element={<RegistrarJardinero />} /> */}
             <Route path="/" element={<AdminScreen />} />
+            <Route path="/rol" element={<CambioRolScreen />} />
 
             
         </Routes>
