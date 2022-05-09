@@ -6,6 +6,7 @@ export const types = {
     obtenerUsuario: '[User] Obtener un Usuario',
     obtenerJardinero: '[User] Obtener un Jardinero',
     obtenerNombre: '[User] Obtener Nombre del Jardinero',
+    eliminarUsuario: '[User] Eliminar Usuario',
 
     uiOpenModal: '[UI] Abrir Modal',
     uiCloseModal: '[UI Cerrar Modal',

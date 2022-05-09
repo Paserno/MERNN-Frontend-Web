@@ -25,6 +25,18 @@ export const usuarioReducer = ( state, action) => {
                 )
             }
 
+
+            case types.eliminarUsuario: 
+            return {
+                ...state,
+                usuarios: state.usuarios.filter(
+                    e => ( e.uid === action.payload.uid)
+                            ? false
+                            : true
+
+                )
+            }
+
             case types.obtenerUsuario:
                 return {
                     ...state,

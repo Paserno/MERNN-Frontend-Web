@@ -64,11 +64,13 @@ export const Tablas = () => {
                         <th style={{ width: 80}} scope="col">Rol</th>
                         <th style={{ width: 100}} scope="col">Cambiar Rol</th>
                         <th style={{ width: 80}} scope="col">Registrar</th>
+                        <th style={{ width: 80}} scope="col">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     {
+
                         filtrarUsuarios().map( (usuario, index) => (
                             <ItemTabla 
                                 key= { usuario.uid }

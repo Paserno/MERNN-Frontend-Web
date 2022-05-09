@@ -71,6 +71,21 @@ export const UsuarioProvider = ({ children }) => {
         Swal.close();
     }
 
+    const eliminarUsuario = async( id ) => {
+
+        const resp = await fetchConToken(`admin/${ id }`, {}, 'DELETE')
+
+        console.log(resp)
+        if (resp.ok) {
+            const { usuario } = resp;
+            dispatch({
+                type: types.eliminarUsuario,
+                payload: usuario
+            });
+        }
+
+    }
+
     const uiOpenModal = () => {
         dispatch({type: types.uiOpenModal})
     };
@@ -174,6 +189,7 @@ export const UsuarioProvider = ({ children }) => {
             obtenerNombreJardinero,
             crearJardinero,
             actualizarJardinero,
+            eliminarUsuario,
 
         }}
         >

@@ -26,7 +26,18 @@ export const ItemTabla = ({
     confirmButtonText: 'Si, Cambiar!'
   }
 
-  const { cambiarRol, uiOpenModal, obtenerUsuario } = useContext(UsuarioContext)
+  const deleteAlert = {
+    title: 'Eliminar Usuario',
+    iconColor:'#FF0000',
+    text: "¿Desea eliminar este Usuario?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#dc3545',
+    cancelButtonColor: '#5C5B5B',
+    confirmButtonText: 'Si, Eliminar!'
+  }
+
+  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario } = useContext(UsuarioContext)
 
     // const contador = ids + 1;
     
@@ -66,6 +77,24 @@ export const ItemTabla = ({
       uiOpenModal();
     }
 
+    const deleteUser = (e) => {
+      e.preventDefault();
+
+      Swal.fire(deleteAlert).then((result) => {
+        if (result.isConfirmed) {
+
+          eliminarUsuario(uid);
+
+          Swal.fire(
+              'Guardado!',
+              'El Usuario ha sido eliminado.',
+              'success'
+          )
+        }
+      })
+      
+    }
+
   return (
     <tr
       
@@ -93,7 +122,7 @@ export const ItemTabla = ({
                 : 
                 (
                   <button 
-                    className='btn btn-danger'
+                    className='btn btn-light'
                     onClick={changeUsuario }
                   >
                     Usuario
@@ -108,6 +137,14 @@ export const ItemTabla = ({
               onClick={editarUsuario }
             >
               Editar
+            </button>
+        </td>
+        <td>
+            <button 
+              className='btn btn-danger'
+              onClick={deleteUser }
+            >
+              Borrar
             </button>
         </td>
     </tr>
