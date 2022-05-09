@@ -1,27 +1,42 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { SearchContext } from '../context/SearchContext';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { ItemTabla } from './ItemTabla' 
 
 // FIXME: Codigo Spaghetti
 export const Tablas = () => {
-    const { state } = useContext(UsuarioContext)
+    const { state } = useContext(UsuarioContext);
     const { usuarios, total } = state;
+   
+
+    const {searchingUser} = useContext(SearchContext);
+    const { startSearch, filterUser} = searchingUser;
+    
     const [pagina, setPagina] = useState({
         num: 0,
         valor: 1
     });
     const { num, valor } = pagina
 
-    let paginaMostrar = 5;
+    const filtroAdmin = (usuario) => {
+        if ( usuario.rol !== 'ADMIN_ROLE') return true;
+
+    }
     
-    let valorPagina = total / paginaMostrar;
-
-    const totalPaginas = Math.ceil(valorPagina);
-
     const filtrarUsuarios = () => {
         const usuario = usuarios.filter(filtroAdmin);
-        return usuario.slice(num, num + paginaMostrar)
+
+        if (startSearch){
+            return filterUser.slice(num, num + paginaMostrar)
+        } else {
+            return usuario.slice(num, num + paginaMostrar)
+            
+        }
     }
+
+    let paginaMostrar = 5;
+    let valorPagina = (startSearch) ? filterUser.length / paginaMostrar : total / paginaMostrar;
+    const totalPaginas = Math.ceil(valorPagina);
     
     const nextPage = () => {
         if (valor !== totalPaginas ){
@@ -34,10 +49,6 @@ export const Tablas = () => {
         }
     }
 
-    const filtroAdmin = (usuario) => {
-        if ( usuario.rol !== 'ADMIN_ROLE') return true;
-
-    }
 
     return (
         <div>
@@ -56,6 +67,7 @@ export const Tablas = () => {
                     </tr>
                 </thead>
                 <tbody>
+
                     {
                         filtrarUsuarios().map( (usuario, index) => (
                             <ItemTabla 
