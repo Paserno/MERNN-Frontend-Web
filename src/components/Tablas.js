@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { ItemTabla } from './ItemTabla' 
@@ -52,7 +52,7 @@ export const Tablas = () => {
 
     return (
         <div>
-            <table className="table table-dark table-hover" style={{ height: 450}}>
+            <table className="table table-striped table-dark table-hover" style={{ height: 450}}>
                 <thead>
                     <tr>
                         {/* <th style={{ width: 25}} scope="col">ID</th> */}
