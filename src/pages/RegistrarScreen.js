@@ -22,11 +22,9 @@ export const RegistrarScreen = () => {
     const onSubmit = async(e) => {
         e.preventDefault();
         const [msg, ok] =  await registrarUsuario(nombre, correo, password, apellido, ciudad, direccion)
-        console.log(msg, ok);
         if( !ok ){
             Swal.fire('Error', msg, 'error');
         }else {
-            console.log(msg);
             Swal.fire('Registrado', msg, 'success');
             navigate( '/auth/login', {
                 replace: true

@@ -91,7 +91,7 @@ export const RegistrarJardinero = () => {
       Swal.fire(warningAlert).then((result) => {
         if (result.isConfirmed) {
 
-          console.log(id);
+          // console.log(id);
           actualizarJardinero( id, activo, descripcion, especialidad);
           closeModal();
           

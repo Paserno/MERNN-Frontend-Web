@@ -75,7 +75,7 @@ export const UsuarioProvider = ({ children }) => {
 
         const resp = await fetchConToken(`admin/${ id }`, {}, 'DELETE')
 
-        console.log(resp)
+        // console.log(resp)
         if (resp.ok) {
             const { usuario } = resp;
             dispatch({
@@ -129,7 +129,7 @@ export const UsuarioProvider = ({ children }) => {
                 payload: jardinero
             })
             okActualizarDatos(resp.ok);
-            console.log(resp.ok)
+            // console.log(resp.ok)
         }
         Swal.close();
     }
@@ -164,7 +164,7 @@ export const UsuarioProvider = ({ children }) => {
     const actualizarJardinero = async(id ,activo, descripcion, especialidad) => {
 
         const resp = await fetchConToken(`admin/jardinero/${id}`, { especialidad, descripcion, activo}, 'PUT');
-        console.log(resp)
+        // console.log(resp)
         if (resp.ok ){
             const {jardinero} = resp
             dispatch({
