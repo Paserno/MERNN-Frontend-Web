@@ -1,23 +1,56 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { AuthContext } from '../context/AuthContext';
-import { useForm } from '../hooks/useForm'
 
 export const LoginScreen = () => {
 
-    const {login} = useContext(AuthContext)
+    const {login} = useContext(AuthContext);
 
-    const [ valuesInput, handleInputChange ] = useForm({
+    const [form, setForm] = useState({
         correo: '',
         password: '',
-    });
-    const { correo, password } = valuesInput;
+        rememberme: false
+    })
+
+
+    useEffect(() => {
+        const email = localStorage.getItem('correo');
+        if (email) {
+            setForm((form)=> ({
+                ...form,
+                correo: email,
+                rememberme: true,
+            }))
+        }
+    }, [])
+
+    const onChange = ({ target }) => {
+        const { name, value } = target;
+        setForm({
+            ...form,
+            [name]: value
+        });
+
+    }
+
+    const toggleCheck = () => {
+        setForm({
+            ...form,
+            rememberme: !form.rememberme
+        });
+    }
+    
 
     const handleLogin = async(e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        (form.rememberme)
+            ? localStorage.setItem('correo', form.correo)
+            : localStorage.removeItem('correo');
         
+        const { correo, password } = form;
         const [ ok, msg ] = await login(correo, password);
 
         if( !ok ){
@@ -26,12 +59,15 @@ export const LoginScreen = () => {
     }
 
     const todoOk=()=>{
-        return (correo.length > 1 && password.length > 1) ? true : false;
+        return (form.correo.length > 1 && form.password.length > 1) ? true : false;
     }
         
   return (
     
-    <form className="login100-form validate-form flex-sb flex-w"
+    <form 
+        className="login100-form validate-form flex-sb flex-w"
+        onSubmit={ handleLogin }
+        
     >
         <span className="login100-form-title mb-3">
             Login
@@ -42,8 +78,8 @@ export const LoginScreen = () => {
                 type="email"
                 name="correo" 
                 placeholder="Email" 
-                value={ correo }
-                onChange={ handleInputChange }
+                value={ form.correo }
+                onChange={ onChange }
             />
             <span className="focus-input100"></span>
         </div>
@@ -54,18 +90,23 @@ export const LoginScreen = () => {
                 type="password" 
                 name="password" 
                 placeholder="Password" 
-                value={ password }
-                onChange={ handleInputChange }
+                value={ form.password }
+                onChange={ onChange }
             />
             <span className="focus-input100"></span>
         </div>
         
         <div className="row mb-3">
-            <div className="col">
+            <div 
+                className="col"
+                onClick={() => toggleCheck()}
+            >
                 <input className="input-checkbox100" 
                     id="ckb1" 
                     type="checkbox" 
-                    name="remember-me" 
+                    name="rememberme" 
+                    checked={form.rememberme}
+                    readOnly
                 />
                 <label className="label-checkbox100">
                     Recordarme
@@ -85,7 +126,7 @@ export const LoginScreen = () => {
         <div className="container-login100-form-btn m-t-17">
             <button 
                 className="login100-form-btn"
-                onClick={ handleLogin }
+                type='submit'
                 disabled={!todoOk()}
             >
                 Ingresar

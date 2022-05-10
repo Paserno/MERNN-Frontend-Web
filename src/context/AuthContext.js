@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
 
         setAuth(initialState);
-        console.log(auth.logged);
     }
 
     const verificarToken = useCallback( async() => {

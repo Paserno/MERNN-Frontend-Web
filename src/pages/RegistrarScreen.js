@@ -7,15 +7,23 @@ export const RegistrarScreen = () => {
         nombre: '',
         correo: '',
         password: '',
+        apellido: '',
+        ciudad: '',
+        direccion: '',
     });
-    const {nombre, correo, password} = valuesInput;
+    const {nombre, correo, password, apellido, ciudad, direccion} = valuesInput;
 
-    const navigate = useNavigate(); 
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log('registrar')
+    }
 
   return (
    
-    <form className="login100-form validate-form flex-sb flex-w"
+    <form 
+        className="login100-form validate-form flex-sb flex-w"
+        onSubmit={ onSubmit }
     >
         <span className="login100-form-title mb-3">
              Registro
@@ -26,7 +34,18 @@ export const RegistrarScreen = () => {
                 type="text" 
                 name="nombre" 
                 placeholder="Nombre" 
-                value={nombre }
+                value={ nombre }
+                onChange={ handleInputChange }
+            />
+            <span className="focus-input100"></span>
+        </div>
+
+        <div className="wrap-input100 validate-input mb-3">
+            <input className="input100" 
+                type="text" 
+                name="apellido" 
+                placeholder="Apellido" 
+                value={ apellido }
                 onChange={ handleInputChange }
             />
             <span className="focus-input100"></span>
@@ -38,7 +57,7 @@ export const RegistrarScreen = () => {
                 type="email" 
                 name="correo" 
                 placeholder="Email" 
-                value={correo }
+                value={ correo }
                 onChange={ handleInputChange }
             />
             <span className="focus-input100"></span>
@@ -50,7 +69,29 @@ export const RegistrarScreen = () => {
                 type="password" 
                 name="password" 
                 placeholder="Password" 
-                value={password }
+                value={ password }
+                onChange={ handleInputChange }
+            />
+            <span className="focus-input100"></span>
+        </div>
+
+        <div className="wrap-input100 validate-input mb-3">
+            <input className="input100" 
+                type="text" 
+                name="ciudad" 
+                placeholder="Ciudad" 
+                value={ ciudad }
+                onChange={ handleInputChange }
+            />
+            <span className="focus-input100"></span>
+        </div>
+
+        <div className="wrap-input100 validate-input mb-3">
+            <input className="input100" 
+                type="text" 
+                name="direccion" 
+                placeholder="Dirección" 
+                value={ direccion }
                 onChange={ handleInputChange }
             />
             <span className="focus-input100"></span>
@@ -68,7 +109,10 @@ export const RegistrarScreen = () => {
         </div>
 
         <div className="container-login100-form-btn m-t-17">
-            <button className="login100-form-btn">
+            <button 
+                className="login100-form-btn"
+                type='submit'
+            >
                 Crear cuenta
             </button>
         </div>
