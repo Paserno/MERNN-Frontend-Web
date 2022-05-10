@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import Swal from "sweetalert2";
-import { fetchConToken } from "../helpers/fetch";
+import { fetchConToken, fetchSinToken } from "../helpers/fetch";
 import { usuarioReducer } from "../reducers/usuarioReducer";
 import { types } from "../types/types";
 
@@ -174,6 +174,22 @@ export const UsuarioProvider = ({ children }) => {
         }
     }
 
+    const registrarUsuario = async(nombre, correo, password, apellido, ciudad, direccion) => {
+        const resp = await fetchSinToken(`admin`, {nombre, correo, password, apellido, ciudad, direccion}, 'POST');
+
+        console.log(resp)
+
+        if (resp.ok){
+            const { usuario } = resp;
+            dispatch({
+                type: types.registrarUsuario,
+                payload: usuario
+            })
+        }
+
+
+    }
+
 
     return (
         <UsuarioContext.Provider value={{
@@ -190,6 +206,7 @@ export const UsuarioProvider = ({ children }) => {
             crearJardinero,
             actualizarJardinero,
             eliminarUsuario,
+            registrarUsuario,
 
         }}
         >

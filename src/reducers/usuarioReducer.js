@@ -21,7 +21,6 @@ export const usuarioReducer = ( state, action) => {
                     e => ( e.uid === action.payload.uid)
                             ? action.payload
                             : e
-
                 )
             }
 
@@ -96,6 +95,12 @@ export const usuarioReducer = ( state, action) => {
                 return {
                     ...state,
                     jardinero: action.payload
+                }
+
+            case types.registrarUsuario:
+                return {
+                    ...state,
+                    usuarios: [...state.usuarios, action.payload]
                 }
 
         default:

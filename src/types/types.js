@@ -3,6 +3,7 @@ export const types = {
     usuariosCargados: '[User] Usuarios Cargados',
     cambiarRol: '[User] Cambiar Rol',
 
+    registrarUsuario: '[User] Registrar un Usuario', 
     obtenerUsuario: '[User] Obtener un Usuario',
     obtenerJardinero: '[User] Obtener un Jardinero',
     obtenerNombre: '[User] Obtener Nombre del Jardinero',

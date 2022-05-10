@@ -1,5 +1,6 @@
-import React from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom';
+import { UsuarioContext } from '../context/UsuarioContext';
 import { useForm } from '../hooks/useForm'
 
 export const RegistrarScreen = () => {
@@ -13,10 +14,13 @@ export const RegistrarScreen = () => {
     });
     const {nombre, correo, password, apellido, ciudad, direccion} = valuesInput;
 
+    const { registrarUsuario } = useContext(UsuarioContext);
+
 
     const onSubmit = (e) => {
         e.preventDefault();
         console.log('registrar')
+        registrarUsuario(nombre, correo, password, apellido, ciudad, direccion)
     }
 
   return (
