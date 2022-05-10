@@ -177,7 +177,7 @@ export const UsuarioProvider = ({ children }) => {
     const registrarUsuario = async(nombre, correo, password, apellido, ciudad, direccion) => {
         const resp = await fetchSinToken(`admin`, {nombre, correo, password, apellido, ciudad, direccion}, 'POST');
 
-        console.log(resp)
+        // console.log(resp)
 
         if (resp.ok){
             const { usuario } = resp;
@@ -185,6 +185,13 @@ export const UsuarioProvider = ({ children }) => {
                 type: types.registrarUsuario,
                 payload: usuario
             })
+            const msg = 'Se ha registrado con exito'
+            return [ msg, resp.ok ]
+        }
+        const { msg } = resp?.errors[0]
+
+        if(msg){
+            return [ msg ]
         }
 
 

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { useForm } from '../hooks/useForm'
 
@@ -16,11 +17,33 @@ export const RegistrarScreen = () => {
 
     const { registrarUsuario } = useContext(UsuarioContext);
 
+    const navigate = useNavigate();
 
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault();
-        console.log('registrar')
-        registrarUsuario(nombre, correo, password, apellido, ciudad, direccion)
+        const [msg, ok] =  await registrarUsuario(nombre, correo, password, apellido, ciudad, direccion)
+        console.log(msg, ok);
+        if( !ok ){
+            Swal.fire('Error', msg, 'error');
+        }else {
+            console.log(msg);
+            Swal.fire('Registrado', msg, 'success');
+            navigate( '/auth/login', {
+                replace: true
+            });
+
+        }
+    }
+
+    const todoOk = () => {
+        return (
+            correo.length > 1 && 
+            password.length > 1 &&
+            correo.length > 1 &&
+            apellido.length > 1 &&
+            ciudad.length > 1 &&
+            direccion.length > 1 ) ? true : false
+
     }
 
   return (
@@ -116,6 +139,7 @@ export const RegistrarScreen = () => {
             <button 
                 className="login100-form-btn"
                 type='submit'
+                disabled={ !todoOk() }
             >
                 Crear cuenta
             </button>
