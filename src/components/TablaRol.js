@@ -16,6 +16,7 @@ export const TablaRol = () => {
                     <tr>
                         {/* <th style={{ width: 25}} scope="col">ID</th> */}
                         <th style={{ width: 80}} scope="col">Nombre</th>
+                        <th style={{ width: 80}} scope="col">Correo</th>
                         <th style={{ width: 80}} scope="col">Rol</th>
                         <th style={{ width: 120}} scope="col">Rol Jardinero</th>
                         <th style={{ width: 120}} scope="col">Rol Usuario</th>

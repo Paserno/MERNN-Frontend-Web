@@ -13,7 +13,7 @@ const warningAlert = {
     confirmButtonText: 'Si, Cambiar!'
   }
 
-export const ItemTablaRol = ({ uid, nombre, rol }) => {
+export const ItemTablaRol = ({ uid, nombre, rol, correo }) => {
 
     const { cambiarRol } = useContext(UsuarioContext)
 
@@ -65,6 +65,7 @@ export const ItemTablaRol = ({ uid, nombre, rol }) => {
         >
             {/* <th scope="row">{contador}</th> */}
             <td>{ nombre }</td>
+            <td>{ correo }</td>
             <td>{ rol }</td>
             <td>
                 <button 
