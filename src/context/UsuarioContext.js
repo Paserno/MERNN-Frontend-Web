@@ -27,7 +27,7 @@ export const UsuarioProvider = ({ children }) => {
 
     const cargarUsuarios = async() => {
         const resp = await fetchConToken('admin/?limite=100', {}, 'GET');
-
+        // console.log(resp);
         if ( resp.ok ){
             const { usuarios, total } = resp;
             dispatch({

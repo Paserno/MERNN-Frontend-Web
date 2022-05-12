@@ -4,7 +4,7 @@ import { ItemTablaRol } from './ItemTablaRol';
 
 export const TablaRol = () => {
 
-    const {cargarUsuarios , state} = useContext(UsuarioContext);
+    const { state } = useContext(UsuarioContext);
     const { usuarios } = state;
 
 

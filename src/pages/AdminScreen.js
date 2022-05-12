@@ -11,15 +11,20 @@ export const AdminScreen = () => {
   const {cargarUsuarios , state} = useContext(UsuarioContext);
   const {getUsuarioByName} = useContext(SearchContext)
 
-  const { isLoading, usuarios } = state;
+  const { isLoading } = state;
 
   const [searchUser, setSearchUser] = useState({
     buscar: '',
   })
+  const tiempoEspera =  600000
   
   useEffect(() => {
     cargarUsuarios();
-  }, [usuarios])
+  }, [])
+
+  setTimeout(() => {
+    cargarUsuarios();    
+  }, tiempoEspera);
 
   const handleInputChange = ({target}) => {
     setSearchUser({

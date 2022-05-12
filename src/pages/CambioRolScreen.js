@@ -4,14 +4,16 @@ import { UsuarioContext } from '../context/UsuarioContext';
 
 export const CambioRolScreen = () => {
 
-    const {cargarUsuarios , state} = useContext(UsuarioContext);
-    const { usuarios } = state;
-
+    const {cargarUsuarios} = useContext(UsuarioContext);
+    const tiempoEspera =  600000
 
     useEffect(() => {
-    cargarUsuarios();
-  }, [usuarios])
+        cargarUsuarios();
+  }, [])
     
+  setTimeout(() => {
+    cargarUsuarios();    
+  }, tiempoEspera);
 
   return (
     <div className='container'>

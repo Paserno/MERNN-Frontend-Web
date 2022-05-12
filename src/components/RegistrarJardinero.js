@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Modal from 'react-modal/lib/components/Modal'
 import Swal from 'sweetalert2';
 import { UsuarioContext } from '../context/UsuarioContext';

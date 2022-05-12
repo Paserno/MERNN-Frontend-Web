@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useRef, useState } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { ItemTabla } from './ItemTabla' 
@@ -6,7 +6,8 @@ import { ItemTabla } from './ItemTabla'
 // FIXME: Codigo Spaghetti
 export const Tablas = () => {
     const { state } = useContext(UsuarioContext);
-    const { usuarios, total } = state;
+    const { usuarios } = state;
+    let numeroMemorizar = useRef(0).current
    
 
     const {searchingUser} = useContext(SearchContext);
@@ -17,29 +18,41 @@ export const Tablas = () => {
         valor: 1
     });
     const { num, valor } = pagina
+    let paginaMostrar = 5;
+
 
     const filtroAdmin = (usuario) => {
         if ( usuario.rol !== 'ADMIN_ROLE') return true;
-
     }
     
     const filtrarUsuarios = () => {
         const usuario = usuarios.filter(filtroAdmin);
+        const filterUserAdmin = filterUser.filter(filtroAdmin);
+        sumaPaginas(filterUserAdmin.length, usuario.length)
+        
 
         if (startSearch){
-            return filterUser.slice(num, num + paginaMostrar)
+            return filterUserAdmin.slice(num, num + paginaMostrar)
         } else {
             return usuario.slice(num, num + paginaMostrar)
             
         }
     }
 
-    let paginaMostrar = 5;
-    let valorPagina = (startSearch) ? filterUser.length / paginaMostrar : total / paginaMostrar;
-    const totalPaginas = Math.ceil(valorPagina);
+   const sumaPaginas = (valo1, valor2) => {
+
+    const valorPagina = (startSearch) ? valo1 / paginaMostrar : valor2 / paginaMostrar;
+    numeroMemorizar = Math.ceil(valorPagina) || 0;
+    console.log(numeroMemorizar + ' que wea')
+    return [numeroMemorizar];
+   }
+    
     
     const nextPage = () => {
-        if (valor !== totalPaginas ){
+        const [totalPaginas] = sumaPaginas(); 
+        console.log(totalPaginas)
+
+        if (valor  !== totalPaginas ){
             setPagina({num: num + paginaMostrar, valor: valor + 1});
         }
     }
@@ -52,7 +65,10 @@ export const Tablas = () => {
 
     return (
         <div>
-            <table className="table table-striped table-dark table-hover" style={{ height: 450}}>
+            <table 
+                className='table table-striped table-dark table-hover' 
+                style={{ height: 500 }}
+            >
                 <thead>
                     <tr>
                         {/* <th style={{ width: 25}} scope="col">ID</th> */}
@@ -68,7 +84,6 @@ export const Tablas = () => {
                     </tr>
                 </thead>
                 <tbody>
-
                     {
 
                         filtrarUsuarios().map( (usuario, index) => (
@@ -81,6 +96,14 @@ export const Tablas = () => {
                     }                    
                 </tbody>
             </table>
+            {
+                    (filtrarUsuarios().length === 0) ? (<div className="alert alert-danger" style={{ marginTop: -450, marginBottom: 400 }} role="alert">
+                    No hay mas datos
+                    </div>):<div></div>  
+                }
+                {
+                    filtrarUsuarios().length
+                }
             <div className='pagination justify-content-center'>
                 <button
                     type='button'
