@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import Swal from 'sweetalert2'
+import { SearchContext } from '../context/SearchContext'
 import { UsuarioContext } from '../context/UsuarioContext'
 
 
@@ -37,7 +38,8 @@ export const ItemTabla = ({
     confirmButtonText: 'Si, Eliminar!'
   }
 
-  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario } = useContext(UsuarioContext)
+  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario } = useContext(UsuarioContext);
+  const {cambiarUsuariosFiltrados} = useContext(SearchContext)
 
     // const contador = ids + 1;
     
@@ -46,6 +48,8 @@ export const ItemTabla = ({
         if (result.isConfirmed) {
 
           cambiarRol(uid, 'OTRO_ROLE');
+          cambiarUsuariosFiltrados(uid, 'OTRO_ROLE')
+
 
           Swal.fire(
               'Guardado!',
@@ -61,6 +65,7 @@ export const ItemTabla = ({
         if (result.isConfirmed) {
 
           cambiarRol(uid, 'USER_ROLE');
+          cambiarUsuariosFiltrados(uid, 'USER_ROLE')
 
           Swal.fire(
               'Guardado!',

@@ -51,9 +51,10 @@ export const LoginScreen = () => {
             : localStorage.removeItem('correo');
         
         const { correo, password } = form;
-        const [ ok, msg ] = await login(correo, password);
+        const [ ok, msg = 'No se pudo establecer conexión con el Servidor' ] = await login(correo, password);
 
         if( !ok ){
+
             Swal.fire('Error', msg, 'error');
         }
     }

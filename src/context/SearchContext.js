@@ -15,11 +15,21 @@ export const SearchProvider = ({ children }) => {
     });
     let { filterUser } = searchingUser;
     const { state } = useContext(UsuarioContext);
+    const { usuarios } = state;
+
+
+    const cambiarUsuariosFiltrados = (uid, rol ) => {
+
+        filterUser = usuarios.map(
+            usuario => ( usuario.uid === uid )
+                        ? usuario.rol = rol 
+                        : usuario
+        )
+    }
+    
 
      const getUsuarioByName = ( name = '') => {
 
-        const { usuarios } = state;
-      
         if( name.length === 0 ){
             setSearchingUser({
                 ...searchingUser,
@@ -45,6 +55,7 @@ export const SearchProvider = ({ children }) => {
         <SearchContext.Provider value={{
             searchingUser,
             getUsuarioByName,
+            cambiarUsuariosFiltrados
         }}
         >
             { children }

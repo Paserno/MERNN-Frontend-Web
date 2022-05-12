@@ -26,9 +26,6 @@ export const Tablas = () => {
     const filterUserAdmin = filterUser.filter(filtroAdmin);
     
     const filtrarUsuarios = () => {
-        
-
-            console.log('hola')
         if (startSearch){
             return filterUserAdmin.slice(num, num + paginaMostrar)
         } else {
