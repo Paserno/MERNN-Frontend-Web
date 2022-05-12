@@ -26,6 +26,12 @@ export const AdminScreen = () => {
     cargarUsuarios();    
   }, tiempoEspera);
 
+  useEffect(() => {
+    getUsuarioByName(searchUser.buscar)
+    console.log('first')
+  }, [state])
+  
+
   const handleInputChange = ({target}) => {
     setSearchUser({
       ...searchUser,

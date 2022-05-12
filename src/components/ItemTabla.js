@@ -38,8 +38,7 @@ export const ItemTabla = ({
     confirmButtonText: 'Si, Eliminar!'
   }
 
-  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario } = useContext(UsuarioContext);
-  const {cambiarUsuariosFiltrados} = useContext(SearchContext)
+  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario, cargarUsuarios } = useContext(UsuarioContext);
 
     // const contador = ids + 1;
     
@@ -48,7 +47,6 @@ export const ItemTabla = ({
         if (result.isConfirmed) {
 
           cambiarRol(uid, 'OTRO_ROLE');
-          cambiarUsuariosFiltrados(uid, 'OTRO_ROLE')
 
 
           Swal.fire(
@@ -65,7 +63,6 @@ export const ItemTabla = ({
         if (result.isConfirmed) {
 
           cambiarRol(uid, 'USER_ROLE');
-          cambiarUsuariosFiltrados(uid, 'USER_ROLE')
 
           Swal.fire(
               'Guardado!',
