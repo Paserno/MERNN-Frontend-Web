@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { SearchContext } from '../context/SearchContext';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { ItemTabla } from './ItemTabla' 
@@ -6,8 +6,7 @@ import { ItemTabla } from './ItemTabla'
 // FIXME: Codigo Spaghetti
 export const Tablas = () => {
     const { state } = useContext(UsuarioContext);
-    const { usuarios } = state;
-    let numeroMemorizar = useRef(0).current
+    const { usuarios, total } = state;
    
 
     const {searchingUser} = useContext(SearchContext);
@@ -18,19 +17,18 @@ export const Tablas = () => {
         valor: 1
     });
     const { num, valor } = pagina
-    let paginaMostrar = 5;
-
 
     const filtroAdmin = (usuario) => {
         if ( usuario.rol !== 'ADMIN_ROLE') return true;
+
     }
+    const usuario = usuarios.filter(filtroAdmin);
+    const filterUserAdmin = filterUser.filter(filtroAdmin);
     
     const filtrarUsuarios = () => {
-        const usuario = usuarios.filter(filtroAdmin);
-        const filterUserAdmin = filterUser.filter(filtroAdmin);
-        sumaPaginas(filterUserAdmin.length, usuario.length)
         
 
+            console.log('hola')
         if (startSearch){
             return filterUserAdmin.slice(num, num + paginaMostrar)
         } else {
@@ -39,20 +37,12 @@ export const Tablas = () => {
         }
     }
 
-   const sumaPaginas = (valo1, valor2) => {
-
-    const valorPagina = (startSearch) ? valo1 / paginaMostrar : valor2 / paginaMostrar;
-    numeroMemorizar = Math.ceil(valorPagina) || 0;
-    console.log(numeroMemorizar + ' que wea')
-    return [numeroMemorizar];
-   }
-    
+    let paginaMostrar = 5;
+    let valorPagina = (startSearch) ? filterUserAdmin.length / paginaMostrar : usuario.length / paginaMostrar;
+    const totalPaginas = Math.ceil(valorPagina);
     
     const nextPage = () => {
-        const [totalPaginas] = sumaPaginas(); 
-        console.log(totalPaginas)
-
-        if (valor  !== totalPaginas ){
+        if (valor !== totalPaginas   ){
             setPagina({num: num + paginaMostrar, valor: valor + 1});
         }
     }
@@ -84,6 +74,7 @@ export const Tablas = () => {
                     </tr>
                 </thead>
                 <tbody>
+
                     {
 
                         filtrarUsuarios().map( (usuario, index) => (

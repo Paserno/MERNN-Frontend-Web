@@ -39,12 +39,12 @@ export const SearchProvider = ({ children }) => {
         return true;
     }
 
-
+    
 
     return (
         <SearchContext.Provider value={{
             searchingUser,
-            getUsuarioByName
+            getUsuarioByName,
         }}
         >
             { children }
