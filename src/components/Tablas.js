@@ -6,7 +6,7 @@ import { ItemTabla } from './ItemTabla'
 // FIXME: Codigo Spaghetti
 export const Tablas = () => {
     const { state } = useContext(UsuarioContext);
-    const { usuarios, total } = state;
+    const { usuarios } = state;
    
 
     const {searchingUser} = useContext(SearchContext);

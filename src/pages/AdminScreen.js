@@ -16,20 +16,27 @@ export const AdminScreen = () => {
   const [searchUser, setSearchUser] = useState({
     buscar: '',
   })
-  const tiempoEspera =  600000
+
+  const [start, setStart] = useState(true);
+  
   
   useEffect(() => {
     cargarUsuarios();
-  }, [])
+    timerStart()
+  }, [start])
 
-  setTimeout(() => {
-    cargarUsuarios();    
-  }, tiempoEspera);
+  // Funcion temporal hasta que se implemente Socket!
+  const timerStart = () => {
+    setTimeout(() => {
+      setStart(!start)
+    }, 60000);
+  }
+  
 
-  useEffect(() => {
-    getUsuarioByName(searchUser.buscar)
-    console.log('first')
-  }, [state])
+  // useEffect(() => {
+  //   getUsuarioByName(searchUser.buscar)
+  //   // console.log('secund')
+  // }, [isLoading])
   
 
   const handleInputChange = ({target}) => {

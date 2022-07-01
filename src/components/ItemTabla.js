@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import Swal from 'sweetalert2'
-import { SearchContext } from '../context/SearchContext'
 import { UsuarioContext } from '../context/UsuarioContext'
 
 
@@ -38,7 +37,7 @@ export const ItemTabla = ({
     confirmButtonText: 'Si, Eliminar!'
   }
 
-  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario, cargarUsuarios } = useContext(UsuarioContext);
+  const { cambiarRol, uiOpenModal, obtenerUsuario, eliminarUsuario } = useContext(UsuarioContext);
 
     // const contador = ids + 1;
     

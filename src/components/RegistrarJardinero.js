@@ -43,11 +43,11 @@ export const RegistrarJardinero = () => {
 
   }, [jardinero])
 
-  useEffect(() => {
-    if (ok){
+  // useEffect(() => {
+  //   if (ok){
       
-    }
-  }, [jardinero])
+  //   }
+  // }, [jardinero])
   
   
 
